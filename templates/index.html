@@ -1,0 +1,18 @@
+   <!DOCTYPE html>
+   <html lang="ru">
+   <head>
+       <meta charset="UTF-8">
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+       <title>Video_test</title>
+   </head>
+   <body>
+       <h1>Список видео</h1>
+       <ul>
+           {% for video in videos %}
+           <li><a href="{{ url_for('video', video_id=video.id) }}">{{ video.title }}</a></li>
+           {% endfor %}
+       </ul>
+   </body>
+   </html>
+   

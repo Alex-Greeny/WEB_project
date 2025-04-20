@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ video.title }}</title>
+</head>
+<body>
+    <h1>{{ video.title }}</h1>
+    <video width="560" height="315" controls>
+        <source src="{{ url_for('send_video', filename=video.filename) }}" type="video/mp4">
+    </video>
+    <br><a href="{{ url_for('index') }}">Назад</a>
+</body>
+</html>

@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+    {% if current_user.is_authenticated %}
+        <div><h1>Профиль пользователя: {{ current_user.nickname}}</h1></div>
+        <div><h3>Логин пользователя: @{{current_user.login}}</h3></div>
+    {% else %}
+        <div><h1>Пожалуйста, авторизуйтесь, чтобы просматривать профиль</h1></div>
+    {%endif%}
+{% endblock %}

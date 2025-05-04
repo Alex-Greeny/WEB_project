@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <style>
+        /* Basic styling for layout */
+        body {
+            margin: 0;
+            font-family: sans-serif;
+        }
+        .container {
+            font-family: sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .login-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+
+        .login-container h2 {
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            text-align: left;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box; /* Important to include padding and border in width */
+        }
+
+        .btn btn-primary {
+            background-color: #4CAF50; /* Green */
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .form-group btn btn-primary:hover {
+            background-color: #3e8e41;
+        }
+
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+        .navbar {
+            background-color: #f0f0f0; /* Light grey background */
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between; /* Space out icon and button */
+            align-items: center; /* Vertically center items */
+        }
+
+        .navbar-left {
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-icon {
+            width: 32px;  /* Adjust size as needed */
+            height: 32px;
+            margin-right: 10px; /* Space between icon and title */
+        }
+
+        .navbar-title {
+            font-size: 1.2em; /* Slightly larger title */
+            font-weight: bold;
+            text-decoration: none;
+            color:black;
+        }
+
+        .navbar-right {
+           margin-right: 10px;
+        }
+
+        .login-button {
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 8px 16px; /* Smaller padding */
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px; /* Smaller font size */
+            cursor: pointer;
+            border-radius: 4px; /* Slightly rounded corners */
+        }
+
+        /* Responsive design (optional) */
+        @media (max-width: 600px) {
+            .navbar {
+                padding: 8px 16px; /* Reduce padding on smaller screens */
+            }
+            .navbar-icon {
+                width: 24px;
+                height: 24px;
+            }
+            .navbar-title {
+                font-size: 1em;
+            }
+            .login-button {
+                font-size: 12px;
+                padding: 6px 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <div class="navbar-left">
+            <img href="/login" src="" alt="App Icon" class="navbar-icon">
+            <a href="/" class="navbar-title">Название</a>
+        </div>
+        {% if current_user.is_authenticated %}
+        <div class="navbar-right">
+            <a href="/profile">{{ current_user.nickname}}</a>
+            <a class="login-button" href="/logout">Выход</a>
+        </div>
+        {% else %}
+            <div class="navbar-right">
+            <a href="/login" class="login-button">Войти</a>
+        </div>
+        {% endif %}
+    </div>
+    <main role="main" class="content">
+    {% block content %}{% endblock %}
+</main>
+</body>
+</html>

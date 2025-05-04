@@ -1,90 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VideoPlayer</title>
-    <style>
-        /* Basic styling for layout */
-        body {
-            margin: 0;
-            font-family: sans-serif;
-        }
+{% extends "base.html" %}
 
-        .navbar {
-            background-color: #f0f0f0; /* Light grey background */
-            padding: 10px 20px;
-            display: flex;
-            justify-content: space-between; /* Space out icon and button */
-            align-items: center; /* Vertically center items */
-        }
-
-        .navbar-left {
-            display: flex;
-            align-items: center;
-        }
-
-        .navbar-icon {
-            width: 32px;  /* Adjust size as needed */
-            height: 32px;
-            margin-right: 10px; /* Space between icon and title */
-        }
-
-        .navbar-title {
-            font-size: 1.2em; /* Slightly larger title */
-            font-weight: bold;
-        }
-
-        .navbar-right {
-            /* No specific styling needed for the button container */
-        }
-
-        .login-button {
-            background-color: #4CAF50; /* Green */
-            border: none;
-            color: white;
-            padding: 8px 16px; /* Smaller padding */
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 14px; /* Smaller font size */
-            cursor: pointer;
-            border-radius: 4px; /* Slightly rounded corners */
-        }
-
-        /* Responsive design (optional) */
-        @media (max-width: 600px) {
-            .navbar {
-                padding: 8px 16px; /* Reduce padding on smaller screens */
-            }
-            .navbar-icon {
-                width: 24px;
-                height: 24px;
-            }
-            .navbar-title {
-                font-size: 1em;
-            }
-            .login-button {
-                font-size: 12px;
-                padding: 6px 12px;
-            }
-        }
-    </style>
-</head>
-<body>
-
-    <div class="navbar">
-        <div class="navbar-left">
-            <img src="" alt="App Icon" class="navbar-icon">
-            <span class="navbar-title">Название</span>
-        </div>
-        <div class="navbar-right">
-            <a href="/login" class="login-button">Войти</a>
-        </div>
-    </div>
-
-    <!-- Your main content goes here -->
-    <div class="content">
+{% block content %}
+<div class="videolist">
         <h1>Список видео</h1>
         <ul>
            {% for video in videos %}
@@ -92,6 +9,4 @@
            {% endfor %}
        </ul>
     </div>
-
-</body>
-</html>
+{% endblock %}

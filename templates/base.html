@@ -52,7 +52,7 @@
             box-sizing: border-box; /* Important to include padding and border in width */
         }
 
-        .btn btn-primary {
+        .btn.btn-primary {
             background-color: #4CAF50; /* Green */
             color: white;
             padding: 10px 15px;
@@ -113,6 +113,19 @@
             border-radius: 4px; /* Slightly rounded corners */
         }
 
+        .upload-button {
+            background-color: #503732;
+            border: none;
+            color: white;
+            padding: 8px 16px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
         /* Responsive design (optional) */
         @media (max-width: 600px) {
             .navbar {
@@ -133,7 +146,6 @@
     </style>
 </head>
 <body>
-
     <div class="navbar">
         <div class="navbar-left">
             <img href="/login" src="" alt="App Icon" class="navbar-icon">
@@ -142,6 +154,7 @@
         {% if current_user.is_authenticated %}
         <div class="navbar-right">
             <a href="/profile">{{ current_user.nickname}}</a>
+            <a class="upload-button" href="/upload">Новое видео</a>
             <a class="login-button" href="/logout">Выход</a>
         </div>
         {% else %}

@@ -7,9 +7,12 @@
 </head>
 <body>
     <h1>{{ video.title }}</h1>
-    <video width="560" height="315" controls>
+    <video width="640" height="360" controls>
         <source src="{{ url_for('send_video', filename=video.filename) }}" type="video/mp4">
     </video>
+    <br><a>Автор: {{video.author_id}}</a>
+    <br><a>Дата публикации: {{video.publication_date}}</a>
+    <br><a>Описание: {{video.description}}</a>
     <br><a href="{{ url_for('index') }}">Назад</a>
 </body>
 </html>

@@ -15,6 +15,7 @@ class Videos(SqlAlchemyBase, SerializerMixin):
     description = sqlalchemy.Column(sqlalchemy.String, nullable=True)
     publication_date = sqlalchemy.Column(sqlalchemy.DateTime, default=datetime.datetime.now)
     filename = sqlalchemy.Column(sqlalchemy.String, nullable=True)
+    preview = sqlalchemy.Column(sqlalchemy.String, nullable=True)
     #comments = orm.relationship("Comments", back_populates='video')
 
     #user = orm.relationship('User')

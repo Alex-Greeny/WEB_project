@@ -43,13 +43,15 @@ class VideosResource(Resource):
         parser.add_argument('description', required=True, type=str)
         parser.add_argument('publication_date', required=True)
         parser.add_argument('filename', required=True)
+        parser.add_argument('preview', required=True)
         args = parser.parse_args()
         session.query(Videos).filter_by(id=video_id).update({"id": args['id'],
                                                             "author_id": args['author_id'],
                                                             "title": args['title'],
                                                             "description": args['description'],
                                                             "publication_date": args['publication_date'],
-                                                            "filename": args['filename']})
+                                                            "filename": args['filename'],
+                                                            "preview": args['preview']})
         session.commit()
         return jsonify({'success': 'OK'})
 
@@ -66,10 +68,10 @@ class VideosListResource(Resource):
         parser = reqparse.RequestParser()
         parser.add_argument('id', required=True, type=int)
         parser.add_argument('author_id', required=True)
-        parser.add_argument('title', required=True, type=bool)
+        parser.add_argument('title', required=True)
         parser.add_argument('description', required=True, type=str)
-        parser.add_argument('publication_date', required=True)
         parser.add_argument('filename', required=True)
+        parser.add_argument('preview', required=True)
         args = parser.parse_args()
         session = db_session.create_session()
         video = Videos(
@@ -77,8 +79,8 @@ class VideosListResource(Resource):
             author_id=args['author_id'],
             title=args['title'],
             description=args['description'],
-            publication_date=args['publication_date'],
-            filename=args['filename']
+            filename=args['filename'],
+            preview=args['preview']
         )
         session.add(video)
         session.commit()

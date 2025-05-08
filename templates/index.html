@@ -1,13 +1,43 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="videolist">
-        <h1>Список видео</h1>
-        <ul>
+<h1>Список видео</h1>
+   <div class="video-grid">
            {% for video in videos %}
-        <a href="{{ url_for('video', video_id=video.id) }}"><img src="static/previews/{{video.preview}}" alt="Превью видео" width="400" height="200"><p>{{video.title}}</p></a>
-            <a><p>{{video.author_id}}</p></a>
+            <div class="video-item">
+        <a href="{{ url_for('video', video_id=video.id) }}">
+            <img src="static/previews/{{video.preview}}" alt="Превью видео" width="400" height="200">
+            <h2>&nbsp;{{video.title}}</h2></a>
+            {% for user in users %}
+                {% if user.id == video.author_id %}
+                <a href="{{ url_for('profile', user_id=user.id) }}">
+                    <h4> &nbsp;&nbsp;&nbsp;{{user.nickname}} </h4></a>
+                {% endif %}
+                {% endfor %}
+                </div>
            {% endfor %}
-       </ul>
+
     </div>
+
+<style>
+    .video-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .video-item {
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        .video-item img {
+            margin: 5px;
+            border-radius: 10px;
+        }
+        h2, h4 {
+                margin: 5px;
+        }
+</style>
+
 {% endblock %}

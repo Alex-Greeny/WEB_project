@@ -40,15 +40,18 @@ def bad_request(_):
 @app.route('/')
 def index():
     videos = get('http://localhost:5000//api/videos').json()
+    users = get('http://localhost:5000//api/users').json()
     print(videos)
-    return render_template('index.html', videos=videos['videos'], title="VideoPlayer")
+    print(users)
+    return render_template('index.html', videos=videos['videos'], users=users['users'], title="VideoPlayer")
 
 
-@app.route('/video/<int:video_id>')
+@app.route('/video/<int:video_id>', methods=['GET'])
 def video(video_id):
-    video = get(f'http://localhost:5000//api/videos/{video_id}').json()
+    video = get(f'http://localhost:5000/api/videos/{video_id}').json()['video']
     print(video)
-    return render_template('video.html', video=video['video'])
+    user = list(filter(lambda x: x["id"] == video["author_id"], get('http://localhost:5000/api/users').json()['users']))
+    return render_template('video.html', video=video, user=user[0], title="VideoPlayer")
 
 
 @app.route('/videos/<path:filename>')
@@ -79,9 +82,20 @@ def login():
     return render_template('login.html', title='Вход', form=form)
 
 
+# Личный профиль
 @app.route('/profile')
-def profile():
-    return render_template('profile.html')
+def personal_profile():
+    return render_template('personal_profile.html')
+
+
+# Профиль пользователя
+@app.route('/profile/<int:user_id>', methods=['GET'])
+def profile(user_id):
+    videos = list(filter(lambda x: x['author_id'] == user_id, get('http://localhost:5000/api/videos').json()['videos']))
+    print(videos)
+    user = list(filter(lambda x: x["id"] == user_id, get('http://localhost:5000/api/users').json()['users']))
+    print(user)
+    return render_template('profile.html', videos=videos, user=user[0], title=user[0]['nickname'])
 
 
 @app.route('/registr', methods=['GET', 'POST'])
@@ -116,6 +130,7 @@ def registration():
     return render_template('registration.html', title='Регистрация', form=form)
 
 
+# Публикация видео
 @app.route('/upload', methods=['GET', 'POST'])
 @login_required
 def upload():
@@ -125,7 +140,7 @@ def upload():
         preview = form.preview.data
         if preview:
             if file:
-                if os.path.getsize(file) <= 209715200:  # 200 Mb
+                if file.content_length <= 209715200:  # 200 Mb
                     videofile = file.filename
                     previewfile = preview.filename
                     file.save(os.path.join('videos', videofile))

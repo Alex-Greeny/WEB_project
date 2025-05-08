@@ -1,18 +1,11 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ video.title }}</title>
-</head>
-<body>
+{% extends "base.html" %}
+
+{% block content %}
     <h1>{{ video.title }}</h1>
     <video width="640" height="360" controls>
         <source src="{{ url_for('send_video', filename=video.filename) }}" type="video/mp4">
     </video>
-    <br><a>Автор: {{video.author_id}}</a>
-    <br><a>Дата публикации: {{video.publication_date}}</a>
-    <br><a>Описание: {{video.description}}</a>
-    <br><a href="{{ url_for('index') }}">Назад</a>
-</body>
-</html>
+    <br>Автор: <a href="{{ url_for('profile', user_id=user.id) }}">{{user.nickname}}</a>
+    <br>Дата публикации: {{video.publication_date}}
+    <br>Описание: {{video.description}}
+{% endblock %}

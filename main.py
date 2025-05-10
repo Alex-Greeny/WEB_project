@@ -9,7 +9,8 @@ import os
 from flask_restful import reqparse, abort, Api, Resource
 import users_rest
 import video_rest
-from forms import LoginForm, RegistrationForm, UploadForm
+import comment_rest
+from forms import LoginForm, RegistrationForm, UploadForm, CommentForm
 from werkzeug.security import generate_password_hash, check_password_hash
 
 
@@ -46,12 +47,37 @@ def index():
     return render_template('index.html', videos=videos['videos'], users=users['users'], title="VideoPlayer")
 
 
-@app.route('/video/<int:video_id>', methods=['GET'])
+@app.route('/video/<int:video_id>', methods=['GET', 'POST'])
 def video(video_id):
+    # Получение видео по id
     video = get(f'http://localhost:5000/api/videos/{video_id}').json()['video']
     print(video)
-    user = list(filter(lambda x: x["id"] == video["author_id"], get('http://localhost:5000/api/users').json()['users']))
-    return render_template('video.html', video=video, user=user[0], title="VideoPlayer")
+
+    # Получение автора видео и всех пользователей
+    author = list(filter(lambda x: x["id"] == video["author_id"],
+                       get('http://localhost:5000/api/users').json()['users']))
+    users = list(get('http://localhost:5000/api/users').json()['users'])
+    print(author)
+    print(users)
+
+    # Получение списка комментариев
+    comments = list(filter(lambda x: x["video_id"] == video_id,
+                           get('http://localhost:5000/api/comments').json()['comments']))
+    print(comments)
+
+    # Форма для написания комментария
+    form = CommentForm()
+    if form.validate_on_submit():
+        text = form.text.data
+        if text:
+            post("http://127.0.0.1:5000//api/comments", json={"id": None,
+                                                              "video_id": video_id,
+                                                              "author_id": current_user.id,
+                                                              "text": form.text.data})
+            form.text.data = ''
+            return redirect(url_for('video', video_id=video_id))
+    return render_template('video.html', video=video, author=author[0], comments=comments, users=users,
+                           comms_cnt=len(comments), form=form, title="VideoPlayer")
 
 
 @app.route('/videos/<path:filename>')
@@ -177,9 +203,11 @@ def main():
     # для списка объектов
     api.add_resource(users_rest.UsersListResource, '/api/users')
     api.add_resource(video_rest.VideosListResource, '/api/videos')
+    api.add_resource(comment_rest.CommentsListResource, '/api/comments')
     # для одного объекта
     api.add_resource(users_rest.UsersResource, '/api/users/<string:login>')
     api.add_resource(video_rest.VideosResource, '/api/videos/<int:video_id>')
+    api.add_resource(comment_rest.CommentsResource, '/api/comments/<int:comment_id>')
 
     app.run()
 

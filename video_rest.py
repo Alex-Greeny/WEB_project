@@ -6,7 +6,6 @@ from data.videos import Videos
 from data import db_session
 
 
-
 app = Flask(__name__)
 api = Api(app)
 
@@ -47,15 +46,13 @@ class VideosResource(Resource):
         args = parser.parse_args()
         session.query(Videos).filter_by(id=video_id).update({"id": args['id'],
                                                             "author_id": args['author_id'],
-                                                            "title": args['title'],
-                                                            "description": args['description'],
-                                                            "publication_date": args['publication_date'],
-                                                            "filename": args['filename'],
-                                                            "preview": args['preview']})
+                                                             "title": args['title'],
+                                                             "description": args['description'],
+                                                             "publication_date": args['publication_date'],
+                                                             "filename": args['filename'],
+                                                             "preview": args['preview']})
         session.commit()
         return jsonify({'success': 'OK'})
-
-
 
 
 class VideosListResource(Resource):

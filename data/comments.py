@@ -14,6 +14,3 @@ class Comments(SqlAlchemyBase, SerializerMixin):
     author_id = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey("users.id"), nullable=True)
     text = sqlalchemy.Column(sqlalchemy.String, nullable=True)
     publication_date = sqlalchemy.Column(sqlalchemy.DateTime, default=datetime.datetime.now)
-
-    video = orm.relationship('Videos')
-    user = orm.relationship('User')

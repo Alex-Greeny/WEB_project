@@ -24,3 +24,8 @@ class UploadForm(FlaskForm):
     preview = FileField('Установите обложку', validators=[DataRequired()])
     filename = FileField('Загрузите видео', validators=[DataRequired()])
     submit = SubmitField('Опубликовать')
+
+
+class CommentForm(FlaskForm):
+    text = TextAreaField(validators=[DataRequired()])
+    submit = SubmitField('Оставить комментарий')

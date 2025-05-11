@@ -2,10 +2,45 @@
 
 {% block content %}
     <h1>{{ video.title }}</h1>
-    <video width="640" height="360" controls>
+    <video width="1280" height="720" controls style="border-radius: 10px;">
         <source src="{{ url_for('send_video', filename=video.filename) }}" type="video/mp4">
     </video>
-    <br>Автор: <a href="{{ url_for('profile', user_id=user.id) }}">{{user.nickname}}</a>
-    <br>Дата публикации: {{video.publication_date}}
-    <br>Описание: {{video.description}}
+    <h3>Автор: <a href="{{ url_for('profile', user_id=author.id) }}">{{author.nickname}}</a></h3>
+    <h3>Дата публикации: {{video.publication_date}}</h3>
+    <h3>Описание: {{video.description}}</h3>
+    <h3>Комментарии:</h3>
+    {% if current_user.is_authenticated %}
+        <br><form action="" method="post">
+        {{ form.hidden_tag() }}
+        <div class="comment form-group">
+            <div class="input-group" style="display: flex; align-items: stretch;">
+            {{ form.text(class="form-control", type="str", style="resize: none; min-height: 20px; max-height: 40px; font-size: 16px") }}<br>
+            {% for error in form.text.errors %}
+                <div class="alert alert-danger" role="alert">
+                    {{ error }}
+                </div>
+            {% endfor %}
+        </div>
+        <div class="input-group-append">{{ form.submit(type="submit", class="btn btn-comment", style="width: 200px; margin-left: 350px;") }}</div>
+        </div>
+
+
+</form>
+    {% endif %}
+    <h3>Всего комментариев: {{comms_cnt}}</h3>
+    {% for comment in comments %}
+            {% for user in users %}
+                {% if user.id == comment.author_id %}
+                <a href="{{ url_for('profile', user_id=user.id) }}">
+                    <h4> &nbsp;{{user.nickname}} </h4></a>
+                {% endif %}
+                {% endfor %}
+                <h3>&nbsp;{{comment.text}}</h3><br>
+           {% endfor %}
+<style>
+    h3, h4 {
+            font-weight: normal;
+            margin-bottom: 5px;
+        }
+</style>
 {% endblock %}

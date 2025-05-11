@@ -28,7 +28,7 @@ class VideosResource(Resource):
     def delete(self, video_id):
         abort_if_video_not_found(video_id)
         session = db_session.create_session()
-        video = session.query(Videos).get(Videos)
+        video = session.query(Videos).get(video_id)
         session.delete(video)
         session.commit()
         return jsonify({'success': 'OK'})

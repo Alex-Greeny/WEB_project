@@ -5,7 +5,7 @@
         <input type="text" name="search" placeholder="Поиск видео">
         <button type="submit">Поиск</button>
     </form>
-<h1>Список видео</h1>
+<h1>{{search_term}}</h1>
    <div class="video-grid">
            {% for video in videos %}
             <div class="video-item">

@@ -4,7 +4,44 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4065b004-85d2-463f-bd80-46b7b500c9c6" name="Changes" comment="find,delete video" />
+    <list default="true" id="4065b004-85d2-463f-bd80-46b7b500c9c6" name="Changes" comment="find,delete video">
+      <change afterPath="$PROJECT_DIR$/templates/delete.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_11_05_2025_18_26_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_11_05_2025_18_26__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_08_05_2025_18_43_[Changes]/PYZ-00.pyz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_08_05_2025_18_43_[Changes]/base_library.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_08_05_2025_18_43_[Changes]/main.pkg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_08_05_2025_18_43_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_05_2025_17_23_[Changes]/PYZ-00.pyz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_05_2025_17_23_[Changes]/base_library.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_05_2025_17_23_[Changes]/main.pkg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_05_2025_17_23_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_05_2025_17_23__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/comment_rest.py" beforeDir="false" afterPath="$PROJECT_DIR$/comment_rest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/comments.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/comments.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/videos.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/videos.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/videohosting.db" beforeDir="false" afterPath="$PROJECT_DIR$/db/videohosting.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/videohosting.sqbpro" beforeDir="false" afterPath="$PROJECT_DIR$/db/videohosting.sqbpro" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/personal_profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/personal_profile.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/profile.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/register.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/registration.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/registration.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/result.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/result.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/uploading.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/uploading.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/video.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/video.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users_rest.py" beforeDir="false" afterPath="$PROJECT_DIR$/users_rest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/video_rest.py" beforeDir="false" afterPath="$PROJECT_DIR$/video_rest.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -29,15 +66,15 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/Users/Андрей/PycharmProjects/pythonProject3",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Андрей/PycharmProjects/pythonProject3&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Андрей\PycharmProjects\pythonProject3\templates" />

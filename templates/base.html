@@ -19,7 +19,13 @@
             height: 100vh;
             margin: 0;
         }
-
+        .upload form-group input,textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
         .login-container {
             background-color: #fff;
             padding: 20px;
@@ -44,12 +50,12 @@
             font-weight: bold;
         }
 
-        .upload form-group input,textarea {
+        .form-group input {
             width: 100%;
             padding: 8px;
             border: 1px solid #ccc;
             border-radius: 4px;
-            box-sizing: border-box;
+            box-sizing: border-box; /* Important to include padding and border in width */
         }
 
         .btn.btn-primary {
@@ -62,7 +68,7 @@
             font-size: 16px;
         }
 
-        .form-group btn.btn-primary:hover {
+        .form-group btn btn-primary:hover {
             background-color: #3e8e41;
         }
 
@@ -75,13 +81,15 @@
             padding: 10px 20px;
             display: flex;
             justify-content: space-between; /* Space out icon and button */
+            align-items: center; /* Vertically center items */
+        }
+        button */
             align-items: center;
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
         }
-
         .navbar-left {
             display: flex;
             align-items: center;
@@ -130,7 +138,6 @@
             border-radius: 4px;
         }
 
-        /* Responsive design (optional) */
         @media (max-width: 600px) {
             .navbar {
                 padding: 8px 16px; /* Reduce padding on smaller screens */
@@ -158,33 +165,7 @@
         a:hover {
             color: gray;
         }
-        .main-content {
-            flex: 3; /* Основной контент занимает 3 части пространства */
-            padding-right: 20px; /* Добавляем отступ справа, чтобы отделить от боковой панели */
-        }
-
-        .sidebar {
-            flex: 1; /* Боковая панель занимает 1 часть пространства */
-            background-color: #f0f0f0; /* Пример: серый фон для боковой панели */
-            padding: 20px;
-            border-radius: 5px; /* Скругленные углы */
-        }
-
-        .friends-list ul {
-            ist-style: none; /* Убираем маркеры списка */
-            padding: 0;
-        }
-
-        .friends-list li {
-            margin-bottom: 5px; /* Добавляем отступ между элементами списка */
-        }
-
-        .friends-list a {
-            ext-decoration: none; /* Убираем подчеркивание ссылок */
-            color: #007bff; /* Синий цвет ссылок */
-}
-
-        .upload-container {
+               .upload-container {
             background-color: #fff;
             padding: 20px;
             border-radius: 8px;
@@ -221,6 +202,10 @@
             border-radius: 4px;
             cursor: pointer;
             font-size: 12px;}
+
+
+}
+
     </style>
 </head>
 <body>

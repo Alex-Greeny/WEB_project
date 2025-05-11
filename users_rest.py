@@ -7,6 +7,7 @@ from data import db_session
 from werkzeug.security import generate_password_hash
 
 
+
 app = Flask(__name__)
 api = Api(app)
 

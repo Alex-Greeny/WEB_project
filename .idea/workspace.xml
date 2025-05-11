@@ -9,8 +9,8 @@
       <change beforePath="$PROJECT_DIR$/comment_rest.py" beforeDir="false" afterPath="$PROJECT_DIR$/comment_rest.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/delete.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/uploading.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/uploading.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/video.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/video.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/users_rest.py" beforeDir="false" afterPath="$PROJECT_DIR$/users_rest.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/video_rest.py" beforeDir="false" afterPath="$PROJECT_DIR$/video_rest.py" afterDir="false" />
@@ -114,7 +114,14 @@
       <option name="project" value="LOCAL" />
       <updated>1746982536087</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="merge final">
+      <created>1746984956057</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1746984956057</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

@@ -4,6 +4,7 @@ from data import db_session
 from data.db_session import *
 from data.users import User
 from data.videos import Videos
+import requests
 from requests import get, post, delete
 import os
 from flask_restful import reqparse, abort, Api, Resource
@@ -38,29 +39,33 @@ def not_found(error):
 def bad_request(_):
     return make_response(jsonify({'error': 'Bad Request'}), 400)
 
+
+APIURL = "http://localhost:5000"
+
+
 @app.route('/')
 def index():
-    videos = get('http://localhost:5000//api/videos').json()
-    users = get('http://localhost:5000//api/users').json()
-    print(videos)
-    print(users)
+    videos = get(f'{APIURL}//api/videos').json()
+    users = get(f'{APIURL}//api/users').json()
     return render_template('index.html', videos=videos['videos'], users=users['users'], title="VideoPlayer")
 
 
 @app.route('/video/<int:video_id>', methods=['GET', 'POST'])
 def video(video_id):
     # Получение видео по id
-    video = get(f'http://localhost:5000/api/videos/{video_id}').json()['video']
+    video = get(f'{APIURL}/api/videos/{video_id}').json()['video']
     print(video)
 
     # Получение автора видео и всех пользователей
     author = list(filter(lambda x: x["id"] == video["author_id"],
-                       get('http://localhost:5000/api/users').json()['users']))
-    users = list(get('http://localhost:5000/api/users').json()['users'])
+                       get(f'{APIURL}/api/users').json()['users']))
+    users = list(get(f'{APIURL}/api/users').json()['users'])
+    print(author)
+    print(users)
 
     # Получение списка комментариев
     comments = list(filter(lambda x: x["video_id"] == video_id,
-                           get('http://localhost:5000/api/comments').json()['comments']))
+                           get(f'{APIURL}/api/comments').json()['comments']))
     print(comments)
 
     # Форма для написания комментария
@@ -68,7 +73,7 @@ def video(video_id):
     if form.validate_on_submit():
         text = form.text.data
         if text:
-            post("http://127.0.0.1:5000//api/comments", json={"id": None,
+            post(f"{APIURL}//api/comments", json={"id": None,
                                                               "video_id": video_id,
                                                               "author_id": current_user.id,
                                                               "text": form.text.data})
@@ -78,9 +83,31 @@ def video(video_id):
                            comms_cnt=len(comments), form=form, title="VideoPlayer")
 
 
+@app.route('/del_video/<int:video_id>')
+def del_video(video_id):
+    delete(f'{APIURL}/api/videos/{video_id}')
+    return render_template('delete.html', title="Видео удалено")
+
 @app.route('/videos/<path:filename>')
 def send_video(filename):
     return send_from_directory('videos', filename)
+
+
+@app.route('/find', methods=['GET', 'POST'])
+def find():
+    if request.method == 'POST':
+        search_term = request.form['search']
+        try:
+            videos = list(filter(lambda x: search_term.lower() in x['title'].lower() or search_term.lower() in x['description'].lower(), get(f'{APIURL}/api/videos').json()['videos']))
+            if videos[0]:
+                return render_template('result.html', videos=videos, search_term=f"Список видео по запросу : {search_term}", title=search_term)
+        except:
+            return render_template('result.html', videos=[], search_term=f"Не удалось найти видео по запросу: {search_term}", title=search_term)
+
+    videos = get(f'{APIURL}//api/videos').json()
+    users = get(f'{APIURL}//api/users').json()
+    return render_template('index.html', videos=videos['videos'], users=users['users'], title="VideoPlayer")
+
 
 
 @app.route('/videos/<path:filename>')
@@ -98,7 +125,6 @@ def login():
         if user and user.check_password(form.password.data):
             login_user(user)
             return redirect("/")
-        print(user.hashed_password, generate_password_hash(form.login.data))
         return render_template('login.html',
                                message="Неправильный логин или пароль",
                                title='Вход',
@@ -109,15 +135,16 @@ def login():
 # Личный профиль
 @app.route('/profile')
 def personal_profile():
-    return render_template('personal_profile.html')
+    videos = list(filter(lambda x: x['author_id'] == current_user.id, get(f'{APIURL}/api/videos').json()['videos']))
+    return render_template('personal_profile.html', title="Мой профиль", videos=videos)
 
 
 # Профиль пользователя
 @app.route('/profile/<int:user_id>', methods=['GET'])
 def profile(user_id):
-    videos = list(filter(lambda x: x['author_id'] == user_id, get('http://localhost:5000/api/videos').json()['videos']))
+    videos = list(filter(lambda x: x['author_id'] == user_id, get(f'{APIURL}/api/videos').json()['videos']))
     print(videos)
-    user = list(filter(lambda x: x["id"] == user_id, get('http://localhost:5000/api/users').json()['users']))
+    user = list(filter(lambda x: x["id"] == user_id, get(f'{APIURL}/api/users').json()['users']))
     print(user)
     return render_template('profile.html', videos=videos, user=user[0], title=user[0]['nickname'])
 
@@ -128,19 +155,19 @@ def registration():
     if form.validate_on_submit():
         print(form.password.data)
         if form.password.data == form.secondpassword.data:
-            user = get(f"http://127.0.0.1:5000//api/users/{form.login.data}").json()
+            user = get(f"{APIURL}//api/users/{form.login.data}").json()
             print(user)
             if 'login' in user.keys():
                 return render_template('registration.html',
                                        message="Пользователь с таким логином уже существует",
                                        title='Регистрация',
-                                       form = form)
-            post("http://127.0.0.1:5000//api/users", json={"id": None,
+                                       form=form)
+            post(f"{APIURL}//api/users", json={"id": None,
                                                            "login": form.login.data,
                                                            "nickname": form.username.data,
                                                            "email": form.email.data,
                                                            "hashed_password": form.password.data})
-            user = get("http://127.0.0.1:5000//api/users").json()['users'][-1]
+            user = get(f"{APIURL}//api/users").json()['users'][-1]
             user = User(id=user['id'],
                         login=user['login'],
                         nickname=user['nickname'],
@@ -169,7 +196,7 @@ def upload():
                     previewfile = preview.filename
                     file.save(os.path.join('videos', videofile))
                     preview.save(os.path.join('static\\previews', previewfile))
-                    post("http://127.0.0.1:5000//api/videos", json={"id": None,
+                    post(f"{APIURL}//api/videos", json={"id": None,
                                                                     "author_id": current_user.id,
                                                                     "title": form.title.data,
                                                                     "description": form.description.data,

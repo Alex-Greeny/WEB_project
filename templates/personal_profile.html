@@ -11,39 +11,5 @@
         {% endfor %}
     {% else %}
         <div><h1>Пожалуйста, авторизуйтесь, чтобы просматривать профиль</h1></div>
-    <aside class="sidebar">
-    <div class="friends-list">
-      <h2>Друзья</h2>
-      <ul>
-        <li><a href="#">Пользователь 1</a></li>
-        <li><a href="#">Пользователь 2</a></li>
-        <li><a href="#">Пользователь 3</a></li>
-      </ul>
-    </div>
-
-    <!-- ... другие элементы боковой панели, например, реклама, правила сообщества ... -->
-  </aside>
-    <style>
-
-.sidebar {
-  flex: 1; /* Боковая панель занимает 1 часть пространства */
-  background-color: #f0f0f0; /* Пример: серый фон для боковой панели */
-  padding: 20px;
-  border-radius: 5px; /* Скругленные углы */
-}
-
-.friends-list ul {
-  list-style: none; /* Убираем маркеры списка */
-  padding: 0;
-}
-
-.friends-list li {
-  margin-bottom: 5px; /* Добавляем отступ между элементами списка */
-}
-
-.friends-list a {
-  text-decoration: none; /* Убираем подчеркивание ссылок */
-  color: #007bff; /* Синий цвет ссылок */
-}
-    </style>
+    {%endif%}
 {% endblock %}

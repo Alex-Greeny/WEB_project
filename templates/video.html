@@ -1,14 +1,21 @@
 {% extends "base.html" %}
 
 {% block content %}
+    <div style='font-size:20px; font-family: arial black;'>
     <h1>{{ video.title }}</h1>
     <video width="1280" height="720" controls style="border-radius: 10px;">
         <source src="{{ url_for('send_video', filename=video.filename) }}" type="video/mp4">
     </video>
-    <h3>Автор: <a href="{{ url_for('profile', user_id=author.id) }}">{{author.nickname}}</a></h3>
-    <h3>Дата публикации: {{video.publication_date}}</h3>
-    <h3>Описание: {{video.description}}</h3>
-    <h3>Комментарии:</h3>
+    </div>
+    <div style='font-size:20px; font-family: arial black; margin:10px 350px;'>
+         <h3>Автор: <a href="{{ url_for('profile', user_id=author.id) }}">{{author.nickname}}</a></h3>
+        <h3>Дата публикации: {{video.publication_date}}</h3>
+        <h3>Описание: {{video.description}}</h3>
+        {% if current_user.id == video.author_id%}
+        <div><a data-confirm="Вы уверены?" data-method="post" href="/del_video/{{video.id}}" rel="nofollow">Удалить видео</a></div>
+            {%endif%}
+    </div>
+<h3>Комментарии:</h3>
     {% if current_user.is_authenticated %}
         <br><form action="" method="post">
         {{ form.hidden_tag() }}
